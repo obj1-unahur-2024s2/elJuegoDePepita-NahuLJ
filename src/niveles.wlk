@@ -8,7 +8,8 @@ object tutorial1 {
 	method iniciar() {
 		game.addVisual(nido)
 		game.addVisual(silvestre)
-		game.addVisualCharacter(pepita)
+		game.addVisual(pepita)
+		config.configurarTeclas()
 	}
 
 }
@@ -45,8 +46,20 @@ object config {
 	method configurarTeclas() {
 		keyboard.left().onPressDo({ pepita.irA(pepita.position().left(1))})
 		keyboard.right().onPressDo({ pepita.irA(pepita.position().right(1))})
-		// Completar para que se pueda mover arriba y abajo
+		keyboard.up().onPressDo({pepita.irA(pepita.position().up(1))})
+		keyboard.down().onPressDo({pepita.irA(pepita.position().down(1))})
+		//keyboard.space().onPressDo({self.cambiarSeguidorA(pepita.seguidor().siguiente())})
 	}
+
+	/*
+	method cambiarSeguidorA(unSeguidor){
+		game.removeVisual(pepita.seguidor())
+		unSeguidor.position(pepita.seguidor().position())
+		game.addVisual(unSeguidor)
+		pepita.seguidor(unSeguidor)
+
+	}
+	*/
 
 	method configurarColisiones() {
 		game.onCollideDo(pepita, { algo => algo.teEncontro(pepita)})
