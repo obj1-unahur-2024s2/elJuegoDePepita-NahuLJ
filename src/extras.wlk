@@ -9,13 +9,11 @@ object nido {
 	
 }
 
-object silvestre {
-	var property position = game.at(3,0) 
+object silvestre { 
 	
 	method image() = "silvestre.png" 
 
-	method siguiente() = manzana
+	method position() = game.at(pepita.position().x().max(3), 0)
 
-	method estaEnBorde()= position.x() < 3
 }
 

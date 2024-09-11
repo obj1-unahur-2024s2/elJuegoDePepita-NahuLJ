@@ -36,7 +36,6 @@ object tutorial3 {
 		game.addVisual(silvestre)
 		game.addVisual(pepita)
 		config.configurarTeclas()
-		config.configurarColisiones()
 	}
 
 }
@@ -50,16 +49,6 @@ object config {
 		keyboard.down().onPressDo({pepita.irA(pepita.position().down(1))})
 		//keyboard.space().onPressDo({self.cambiarSeguidorA(pepita.seguidor().siguiente())})
 	}
-
-	/*
-	method cambiarSeguidorA(unSeguidor){
-		game.removeVisual(pepita.seguidor())
-		unSeguidor.position(pepita.seguidor().position())
-		game.addVisual(unSeguidor)
-		pepita.seguidor(unSeguidor)
-
-	}
-	*/
 
 	method configurarColisiones() {
 		game.onCollideDo(pepita, { algo => algo.teEncontro(pepita)})

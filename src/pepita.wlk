@@ -5,15 +5,14 @@ object pepita {
 
 	var property energia = 100
 	var property position = game.at(0,2)
-	var property seguidor = silvestre
 
 	method image() {
-		return 
-				if (self.estaEnElNido()) "pepita-grande.png" 
-				else if (self.estaAtrapada()) "pepita-gris.png" 
-				else "pepita.png"
+		return "pepita" + self.nombreEstadoEnergia() + ".png" 
 	}
 
+	method nombreEstadoEnergia(){
+		return if (self.estaCansada()) "-gris" else "" 
+	}
 	method come(comida) {
 		energia = energia + comida.energiaQueOtorga()
 	}
@@ -23,9 +22,10 @@ object pepita {
 	}
 
 	method irA(nuevaPosicion) {
-		self.vola(position.distance(nuevaPosicion))
-		position = nuevaPosicion
-		if (self.position().x() >= 3)seguidor.position(game.at(position.x(), seguidor.position().y()))
+		if (not self.estaCansada()){
+			self.vola(position.distance(nuevaPosicion))
+			position = nuevaPosicion
+		}
 	}
 
 	method estaCansada() {
