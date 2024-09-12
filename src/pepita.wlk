@@ -13,8 +13,11 @@ object pepita {
 	method nombreEstadoEnergia(){
 		return if (self.estaCansada()) "-gris" else "" 
 	}
+
 	method come(comida) {
 		energia = energia + comida.energiaQueOtorga()
+		game.removeVisual(comida)
+		game.say(self, "AHHH SIENTO EL PODER!!. Ahora tengo " + energia + " de energia")
 	}
 
 	method vola(kms) {
@@ -25,10 +28,17 @@ object pepita {
 		if (not self.estaCansada()){
 			self.vola(position.distance(nuevaPosicion))
 			position = nuevaPosicion
+			game.say(self, "Tengo " + 0.max(self.energia()) + " de energia restante")
 		}
+		else{
+			game.stop()
+			game.say(self, "ME HICISTE PERDER PELOTUDO")
+		}
+		
 	}
 
 	method estaCansada() {
+		
 		return energia <= 0
 	}
 
@@ -37,7 +47,9 @@ object pepita {
 
 	method estaAtrapada() = self.position() == silvestre.position()
 
-
+	method bajar(){
+		position = game.at(position.x(), 0.max(position.y() - 1))
+	}
 
 }
 

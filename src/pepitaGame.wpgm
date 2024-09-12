@@ -15,4 +15,5 @@ program PepitaGame {
 	game.showAttributes(pepita) //Debug
 
 	game.start()
+
 }
