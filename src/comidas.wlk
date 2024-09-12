@@ -10,6 +10,10 @@ object manzana {
 
 	method energiaQueOtorga() = 50
 
+	method interactuar(){
+
+	}
+
 }
 
 object alpiste {
@@ -19,5 +23,9 @@ object alpiste {
 	method position() = game.at(5, 9)
 
 	method energiaQueOtorga() = 80
+
+	method interactuar(){
+
+	}
 }
 

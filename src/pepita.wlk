@@ -7,11 +7,18 @@ object pepita {
 	var property position = game.at(0,2)
 
 	method image() {
-		return "pepita" + self.nombreEstadoEnergia() + ".png" 
+		return "pepita" + self.nombreFotoSegunEstado() + ".png" 
 	}
 
+	method nombreFotoSegunEstado(){
+		return self.nombreEstadoEnergia() + self.nombreEstadoJuego()
+	}
 	method nombreEstadoEnergia(){
-		return if (self.estaCansada()) "-gris" else "" 
+		return if (not self.estaViva()) "-gris" else "" 
+	}
+
+	method nombreEstadoJuego(){
+		return if (self.estaEnElNido()) "-grande" else "" 
 	}
 
 	method come(comida) {
@@ -25,16 +32,11 @@ object pepita {
 	}
 
 	method irA(nuevaPosicion) {
-		if (not self.estaCansada()){
+		if (self.puedeMoverse()){
 			self.vola(position.distance(nuevaPosicion))
 			position = nuevaPosicion
-			game.say(self, "Tengo " + 0.max(self.energia()) + " de energia restante")
+			//game.say(self, "Tengo " + 0.max(self.energia()) + " de energia restante")
 		}
-		else{
-			game.stop()
-			game.say(self, "ME HICISTE PERDER PELOTUDO")
-		}
-		
 	}
 
 	method estaCansada() {
@@ -50,6 +52,21 @@ object pepita {
 	method bajar(){
 		position = game.at(position.x(), 0.max(position.y() - 1))
 	}
+
+	method ganar(){
+			game.say(self, "GANE!!")
+			game.schedule(2000, {=> game.stop()})
+	}
+
+	method perder(){
+		game.say(self, "PERDI!!")
+		game.schedule(2000, {=> game.stop()})
+		
+	}
+
+	method puedeMoverse() = self.estaViva() and not self.estaEnElNido()
+
+	method estaViva() = not self.estaCansada() and not self.estaAtrapada()
 
 }
 

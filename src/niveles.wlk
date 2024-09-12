@@ -64,7 +64,7 @@ object config {
 	}
 
 	method configurarColisiones() {
-		game.onCollideDo(pepita, { comida => pepita.come(comida)})
+		game.onCollideDo(pepita, {algo => algo.interactuar()})
 	}
 
 	method configurarGravedad() {
@@ -73,7 +73,8 @@ object config {
 
 	method iniciar(){
 		self.configurarTeclas()
-		self.configurarGravedad()
+		//self.configurarGravedad()
+		self.configurarColisiones()
 	}
 
 }
