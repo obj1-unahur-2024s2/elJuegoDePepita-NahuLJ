@@ -9,6 +9,7 @@ object nido {
 
 	method interactuar(){
 		pepita.ganar()
+		game.removeTickEvent("gravedad")
 	}
 	
 }
@@ -21,6 +22,7 @@ object silvestre {
 
 	method interactuar(){
 		pepita.perder()
+		game.removeTickEvent("gravedad")
 	}
 
 }

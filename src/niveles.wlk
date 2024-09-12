@@ -73,7 +73,7 @@ object config {
 
 	method iniciar(){
 		self.configurarTeclas()
-		//self.configurarGravedad()
+		self.configurarGravedad()
 		self.configurarColisiones()
 	}
 
