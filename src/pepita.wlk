@@ -11,20 +11,13 @@ object pepita {
 	}
 
 	method nombreFotoSegunEstado(){
-		return self.nombreEstadoEnergia() + self.nombreEstadoJuego()
-	}
-	method nombreEstadoEnergia(){
-		return if (not self.estaViva()) "-gris" else "" 
-	}
-
-	method nombreEstadoJuego(){
-		return if (self.estaEnElNido()) "-grande" else "" 
+		return if (not self.estaViva()) "-gris" else if (self.estaEnElNido()) "-grande" else ""
 	}
 
 	method come(comida) {
 		energia = energia + comida.energiaQueOtorga()
 		game.removeVisual(comida)
-		game.say(self, "AHHH SIENTO EL PODER!!. Ahora tengo " + energia + " de energia")
+		//game.say(self, "AHHH SIENTO EL PODER!!. Ahora tengo " + energia + " de energia")
 	}
 
 	method vola(kms) {
@@ -36,6 +29,9 @@ object pepita {
 			self.vola(position.distance(nuevaPosicion))
 			position = nuevaPosicion
 			//game.say(self, "Tengo " + 0.max(self.energia()) + " de energia restante")
+		}
+		else{
+			self.perder()
 		}
 	}
 
@@ -54,11 +50,13 @@ object pepita {
 	}
 
 	method ganar(){
-			game.say(self, "GANE!!")
-			game.schedule(2000, {=> game.stop()})
+		game.removeTickEvent("gravedad")
+		game.say(self, "GANE!!")
+		game.schedule(2000, {=> game.stop()})
 	}
 
 	method perder(){
+		game.removeTickEvent("gravedad")
 		game.say(self, "PERDI!!")
 		game.schedule(2000, {=> game.stop()})
 		
